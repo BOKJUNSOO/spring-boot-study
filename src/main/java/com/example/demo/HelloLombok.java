@@ -1,4 +1,4 @@
-package com.example.demo.test.spiring;
+package com.example.demo;
 
 
 import lombok.Getter;

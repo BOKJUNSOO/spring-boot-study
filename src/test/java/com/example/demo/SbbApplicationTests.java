@@ -6,19 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 import java.util.List;
-import java.time.LocalDateTime;
 
-import com.example.demo.entity.Answer;
-import com.example.demo.entity.AnswerRepository;
-import com.example.demo.entity.Question;
-import com.example.demo.entity.QuestionRepository;
-import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+import com.example.demo.answer.Answer;
+import com.example.demo.answer.AnswerRepository;
+import com.example.demo.question.Question;
+import com.example.demo.question.QuestionRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import javax.swing.text.html.Option;
 
 // spring boot Test 애너테이션은 해당 클래스가 테스트 클래스임을 의미한다
 @SpringBootTest
