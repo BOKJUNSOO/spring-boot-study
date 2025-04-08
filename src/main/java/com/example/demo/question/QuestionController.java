@@ -3,6 +3,7 @@ package com.example.demo.question;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,8 +22,8 @@ public class QuestionController {
     // private final QuestionRepository questionRepository;
 
     private final QuestionService questionService;
-
-    @GetMapping("/question/list")
+    @RequestMapping("/question")
+    @GetMapping(value="/list")
     public String list(Model model) {
         List<Question> questionList = this.questionService.getList();
         // repository 를 이용하여 데이터를 가져온다. 해당 부분을 Service 가 수행
@@ -39,7 +40,7 @@ public class QuestionController {
         return "question_list";
     }
 
-    @GetMapping(value="/question/detail/{id}")
+    @GetMapping(value="/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer Id) {
         // 서비스를 이용하여 question 객체에 id 저장
         Question question = this.questionService.getQuestion(Id);
