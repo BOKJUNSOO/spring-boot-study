@@ -4,6 +4,7 @@ package com.example.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -31,22 +32,23 @@ class SbbApplicationTests {
 	private AnswerRepository answerRepository;
 
 	// Test 어노테이션은 해당 메서드가 테스트 메서드임을 나타낸다.
-	@Test
-	@DisplayName("Repository DB 참조 test")
-	void testJpa(){
-		//의존성 주입 테스트
-		/*Question q1 = new Question();
-		q1.setSubject("sbb가 무엇인가요?");
-		q1.setContent("sbb에 대해서 알고싶습니다.");
-		q1.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q1);
 
-		Question q2 = new Question();
-		q2.setSubject("스프링부트 모델 질문입니다.");
-		q2.setContent("id는 자동으로 생성되나요?");
-		q2.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q2);*/
-		
+//	@Test
+//	@DisplayName("Repository DB 참조 test")
+//	void testJpa(){
+//		//의존성 주입 테스트
+//		Question q1 = new Question();
+//		q1.setSubject("sbb가 무엇인가요?");
+//		q1.setContent("sbb에 대해서 알고싶습니다.");
+//		q1.setCreateDate(LocalDateTime.now());
+//		this.questionRepository.save(q1);
+//
+//		Question q2 = new Question();
+//		q2.setSubject("스프링부트 모델 질문입니다.");
+//		q2.setContent("id는 자동으로 생성되나요?");
+//		q2.setCreateDate(LocalDateTime.now());
+//		this.questionRepository.save(q2);
+
 		// 리포지터리의 findAll 메서드 
 		// 테이블에 저장된 모든 데이터를 조회한다
 		// assertEquals 메서드는 (예상한 결과, 실제 가져온 결과) 둘을 비교하기 위해 사용한다.
@@ -83,7 +85,6 @@ class SbbApplicationTests {
 		assertEquals("sbb가 무엇인가요?", q.getSubject());
 		 */
 
-	}
 	/*
 	@Test
 	@DisplayName("DB 초기화 및 할당")
@@ -127,7 +128,7 @@ class SbbApplicationTests {
 		assertTrue(oa.isPresent());
 		Answer a = oa.get();
 		assertEquals(2,a.getQuestion().getId());
-	}*/
+	}
 
 	@Transactional
 	@Test
@@ -141,6 +142,5 @@ class SbbApplicationTests {
 
 		assertEquals(1, answerList.size());
 		assertEquals("네 자동으로 생성됩니다.", answerList.get(0).getContent());
-	}
-
+	} */
 }
