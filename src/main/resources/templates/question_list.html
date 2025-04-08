@@ -1,0 +1,17 @@
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--tr 태그는 questionList 에 저장된 value 수만큼 반복한다-->
+    <!--th 속성은 타임리프에서 사용하는 속성을 나타낸다. 자바의 코드와 맵핑되는 부분!-->
+    <tr th:each="question : ${questionList}">
+        <!--td 태그는 question 객체의 subject 속성에 접근한다는 의미이다.-->
+        <td th:text="${question.subject}"></td>
+        <td th:text="${question.createDate}"></td>
+    </tr>
+    </tbody>
+</table>
