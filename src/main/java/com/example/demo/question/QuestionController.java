@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -36,5 +37,10 @@ public class QuestionController {
         // Thymeleaf 템플릿 엔진은
         // 컨트롤러의 리턴값을 파싱하여 해당하는 html 파일을 리턴한다
         return "question_list";
+    }
+
+    @GetMapping(value="/question/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Integer Id) {
+        return "question_detail";
     }
 }

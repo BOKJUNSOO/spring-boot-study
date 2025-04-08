@@ -6,11 +6,12 @@
     </tr>
     </thead>
     <tbody>
-    <!--tr 태그는 questionList 에 저장된 value 수만큼 반복한다-->
-    <!--th 속성은 타임리프에서 사용하는 속성을 나타낸다. 자바의 코드와 맵핑되는 부분!-->
-    <tr th:each="question : ${questionList}">
-        <!--td 태그는 question 객체의 subject 속성에 접근한다는 의미이다.-->
-        <td th:text="${question.subject}"></td>
+    <tr th:each="question, index : ${questionList}">
+        <td>
+            <!--문법 : 문자열에 자바객체를 더해줄때 파이프라인 키워드를 사용한다-->
+            <!--서비스를 이용해 DB 에서 가져온 id 를 참조하고 해당 URL로 링크-->
+            <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        </td>
         <td th:text="${question.createDate}"></td>
     </tr>
     </tbody>
