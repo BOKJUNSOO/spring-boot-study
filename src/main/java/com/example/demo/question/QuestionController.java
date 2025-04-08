@@ -41,6 +41,9 @@ public class QuestionController {
 
     @GetMapping(value="/question/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer Id) {
+        // 서비스를 이용하여 question 객체에 id 저장
+        Question question = this.questionService.getQuestion(Id);
+        model.addAttribute("question",question);
         return "question_detail";
     }
 }

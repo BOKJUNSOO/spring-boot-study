@@ -1,6 +1,8 @@
 package com.example.demo.question;
 
 import java.util.List;
+import java.util.Optional;
+import com.example.demo.DataNotFoundException;
 
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,16 @@ public class QuestionService {
     
     public List<Question> getList() {
         return this.questionRepository.findAll();
+    }
+
+    public Question getQuestion(Integer Id) {
+
+        // Optional 객체 이므로 `if~else` 문을 통해 해당 데이터 존재 여부를 검사한다.
+        Optional<Question> question = this.questionRepository.findById(Id);
+        if (question.isPresent()) {
+            return question.get();
+        } else {
+            throw new DataNotFoundException("question not found");
+        }
     }
 }
