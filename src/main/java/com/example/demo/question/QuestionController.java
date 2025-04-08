@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 
 // question/list URL 매핑을 하기 위한 컨트롤러
+@RequestMapping("/question") // 해당 class 에서 맵핑된 URL 은 모두 `question`을 포함한다
 @RequiredArgsConstructor
 @Controller
 public class QuestionController {
@@ -22,7 +23,6 @@ public class QuestionController {
     // private final QuestionRepository questionRepository;
 
     private final QuestionService questionService;
-    @RequestMapping("/question")
     @GetMapping(value="/list")
     public String list(Model model) {
         List<Question> questionList = this.questionService.getList();
