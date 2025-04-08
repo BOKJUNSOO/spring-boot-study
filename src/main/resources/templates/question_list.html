@@ -1,0 +1,18 @@
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question, index : ${questionList}">
+        <td>
+            <!--문법 : 문자열에 자바객체를 더해줄때 파이프라인 키워드를 사용한다-->
+            <!--서비스를 이용해 DB 에서 가져온 id 를 참조하고 해당 URL로 링크-->
+            <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        </td>
+        <td th:text="${question.createDate}"></td>
+    </tr>
+    </tbody>
+</table>
