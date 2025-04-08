@@ -9,9 +9,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 // URL 매핑을 찾으면 연결된 메서드를 실행한다
 @Controller
 public class MainController {
-	@GetMapping("/sbb") // 해당 도메인으로 요청시 아래으 함수를 실행한다.
+	@GetMapping("/sbb") // 해당 도메인으로 요청시 아래의 함수를 실행한다.
 	@ResponseBody // URL 요청에 문자열로 body 에 리턴
 	public String index() {
-		return "안녕하세요 sbb에 오신 것을 환영합니다.";
+		return "hi";
+	}
+	
+	// 루트 URL 로 접근하면 리디렉션 해준다
+	@GetMapping("/")
+	public String root() {
+		// 리턴값에 redirect: mapping url 형식으로 작성한다
+		return "redirect:/question/list";
 	}
 }
