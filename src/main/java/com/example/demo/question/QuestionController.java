@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -46,5 +48,22 @@ public class QuestionController {
         Question question = this.questionService.getQuestion(Id);
         model.addAttribute("question",question);
         return "question_detail";
+    }
+
+    // 같은 클래스에서 overloading
+    // URL 요청시 GET 방식으로 HTML 응답
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
+    }
+
+    // 다른 인자로 오버로딩
+    // PostMapping 을 통한 사용자가 서버에 요청 (HTML FORM 태그에 POST 방식 명시)
+    @PostMapping("/create")
+    public String quesitonCreate(// RequestParam 을 이용하여 입력받은 값을 자바객체로 저장(html name 태그)
+                                 @RequestParam(value="subject") String subject,
+                                 @RequestParam(value="content") String content) {
+        this.questionService.create(subject,content);
+        return "redirect:/question/list";
     }
 }
