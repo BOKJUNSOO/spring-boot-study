@@ -1,5 +1,8 @@
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<div class ="container my-3">
+<!--layout파일에서 스타일링 하고 layout을 상속하여 사용한다-->
+<!--<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">-->
+<html layout:decorate="~{layout}">
+<!--layout html 의 내용이 삽입-맵핑되는 부분-->
+<div layout:fragment="content" class ="container my-3">
     <table class="table">
         <thead class="table-dark">
             <tr>
@@ -24,3 +27,4 @@
         </tbody>
     </table>
 </div>
+</html>
