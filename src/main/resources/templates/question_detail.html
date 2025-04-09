@@ -5,6 +5,7 @@
 </head>
 <body>
     <!--question객체를 인스턴스화 없이 바로 참조한다.-->
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <h1 th:text="${question.subject}"></h1>
     <div th:text="${question.content}"></div>
 
