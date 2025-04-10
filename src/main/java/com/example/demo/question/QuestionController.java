@@ -56,7 +56,7 @@ public class QuestionController {
     // 같은 클래스에서 overloading
     // URL 요청시 GET 방식으로 HTML 응답
     @GetMapping("/create")
-    public String questionCreate(Question questionForm){ // question_form html에서 object가 필요
+    public String questionCreate(QuestionForm questionForm){ // question_form html에서 object가 필요
             return "question_form";
     }
 
