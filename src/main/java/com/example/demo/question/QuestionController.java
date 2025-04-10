@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -53,17 +56,30 @@ public class QuestionController {
     // 같은 클래스에서 overloading
     // URL 요청시 GET 방식으로 HTML 응답
     @GetMapping("/create")
-    public String questionCreate() {
-        return "question_form";
+    public String questionCreate(Question questionForm){ // question_form html에서 object가 필요
+            return "question_form";
     }
 
     // 다른 인자로 오버로딩
     // PostMapping 을 통한 사용자가 서버에 요청 (HTML FORM 태그에 POST 방식 명시)
+//    @PostMapping("/create")
+//    public String quesitonCreate(// RequestParam 을 이용하여 입력받은 값을 자바객체로 저장(html name 태그)
+//                                 @RequestParam(value="subject") String subject,
+//                                 @RequestParam(value="content") String content) {
+//        this.questionService.create(subject,content);
+//        return "redirect:/question/list";
+//    }
+
+    // QuestionForm 클래스를 컨트롤러에 전송해서 사용
     @PostMapping("/create")
-    public String quesitonCreate(// RequestParam 을 이용하여 입력받은 값을 자바객체로 저장(html name 태그)
-                                 @RequestParam(value="subject") String subject,
-                                 @RequestParam(value="content") String content) {
-        this.questionService.create(subject,content);
+    // form의 name 속성과 questionForm의 멤버변수의 변수명만 같다면 자동으로 바인딩 된다 !!!***
+    public String questionCreate(@Valid QuestionForm questionForm, // 검증 자동으로 작동
+                                 BindingResult bindingResult) { // 검증으로 수행된 결과를 의미하는 격체 항상 위치는 Valid 뒤에 위치
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        // 서비스에 의해 질문 생성! (questionForm 에 멤버변수로 바인딩 된 멤버변수를 겟터로 가져와 할당) **
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list";
     }
 }
