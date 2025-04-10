@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.answer.AnswerForm;
+
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
+
 
 
 // question/list URL 매핑을 하기 위한 컨트롤러
@@ -46,7 +49,9 @@ public class QuestionController {
     }
 
     @GetMapping(value="/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer Id) {
+    public String detail(Model model,
+                         @PathVariable("id") Integer Id,
+                         AnswerForm answerForm) { // question_detail을 수정했으므로
         // 서비스를 이용하여 question 객체에 id 저장
         Question question = this.questionService.getQuestion(Id);
         model.addAttribute("question",question);
