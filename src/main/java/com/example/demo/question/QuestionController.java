@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 import com.example.demo.answer.AnswerForm;
 
@@ -31,22 +32,22 @@ public class QuestionController {
     // private final QuestionRepository questionRepository;
 
     private final QuestionService questionService;
-    @GetMapping(value="/list")
-    public String list(Model model) {
-        List<Question> questionList = this.questionService.getList();
-        // repository 를 이용하여 데이터를 가져온다. 해당 부분을 Service 가 수행
-        // List<Question> questionList = this.questionRepository.findAll();
-
-        // Model 객체에 "questionList" 라는 이름으로 questionList 객체를 저장
-        // 이는 자바 Class 와 template 에 html 과 연결고리 역할을 한다.
-        // model 객체를 참조하여 템플릿에서 그 값을 사용할 수 있다.
-        // `ViewResolver`이 그 역할을 수행한다
-        model.addAttribute("questionList",questionList);
-
-        // Thymeleaf 템플릿 엔진은
-        // 컨트롤러의 리턴값을 파싱하여 해당하는 html 파일을 리턴한다
-        return "question_list";
-    }
+//    @GetMapping(value="/list")
+//    public String list(Model model) {
+//        List<Question> questionList = this.questionService.getList();
+//        // repository 를 이용하여 데이터를 가져온다. 해당 부분을 Service 가 수행
+//        // List<Question> questionList = this.questionRepository.findAll();
+//
+//        // Model 객체에 "questionList" 라는 이름으로 questionList 객체를 저장
+//        // 이는 자바 Class 와 template 에 html 과 연결고리 역할을 한다.
+//        // model 객체를 참조하여 템플릿에서 그 값을 사용할 수 있다.
+//        // `ViewResolver`이 그 역할을 수행한다
+//        model.addAttribute("questionList",questionList);
+//
+//        // Thymeleaf 템플릿 엔진은
+//        // 컨트롤러의 리턴값을 파싱하여 해당하는 html 파일을 리턴한다
+//        return "question_list";
+//    }
 
     @GetMapping(value="/detail/{id}")
     public String detail(Model model,
@@ -86,5 +87,12 @@ public class QuestionController {
         // 서비스에 의해 질문 생성! (questionForm 에 멤버변수로 바인딩 된 멤버변수를 겟터로 가져와 할당) **
         this.questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list";
+    }
+
+    @GetMapping("/list")
+    public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page) {
+        Page<Question> paging = this.questionService.getList(page);
+        model.addAttribute("paging",paging);
+        return "question_list";
     }
 }

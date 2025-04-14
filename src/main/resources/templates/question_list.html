@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="question, loop : ${questionList}">
+            <tr th:each="question, loop : ${paging}">
                 <!--테이블 항목 번호 추가-->
                 <td th:text="${loop.count}">
                 </td>

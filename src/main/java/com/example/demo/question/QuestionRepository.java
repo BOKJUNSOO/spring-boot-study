@@ -1,9 +1,10 @@
+// 리포지터리는 테이블에 접근하고, 데이터를 관리하는 메서드를 제공한다.
 package com.example.demo.question;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-// 리포지터리는 테이블에 접근하고, 데이터를 관리하는 메서드를 제공한다.
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 // JpaRepository 인터페이스를 상속하여 사용한다.
 // JPA 가 제공하는 인터페이스 중 하나로 CRUD 작업을 처리하는 메서드들을 이미 내장하고 있어 데이터 관리 작업을 편리하게 할 수 있다.
 public interface QuestionRepository extends JpaRepository<Question, Integer>{
@@ -15,4 +16,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer>{
 
     // findBySubjectLike 메서드
     List<Question> findBySubjectLike(String subject);
+    Page<Question> findAll(Pageable pageable);
 }

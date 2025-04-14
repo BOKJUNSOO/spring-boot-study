@@ -6,8 +6,13 @@ import java.util.Optional;
 import com.example.demo.DataNotFoundException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import lombok.RequiredArgsConstructor;
+
+import javax.naming.ldap.PagedResultsControl;
 
 // 서비스의 필요성
     // A,B 컨트롤러에서 리포지토리 구현체의 a,b,c 메서드를 수행한다 할때
@@ -46,5 +51,10 @@ public class QuestionService {
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(q);
+    }
+
+    public Page<Question> getList(int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return this.questionRepository.findAll(pageable);
     }
 }
